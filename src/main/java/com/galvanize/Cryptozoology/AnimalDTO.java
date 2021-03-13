@@ -1,14 +1,13 @@
 package com.galvanize.Cryptozoology;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class AnimalDTO {
 
     String name;
