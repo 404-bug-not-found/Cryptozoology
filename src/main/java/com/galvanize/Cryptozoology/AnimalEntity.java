@@ -23,6 +23,8 @@ public class AnimalEntity {
     String type;
     String mood;
 
+    public AnimalEntity(){}
+
     public AnimalEntity(String n, String t, String m) {
         this.name = n;
         this.type = t;
