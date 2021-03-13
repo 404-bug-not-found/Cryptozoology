@@ -8,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -23,13 +25,27 @@ public class ZooTestIT {
 
     @Test
     public void addAnimal() throws Exception{
-
         AnimalDTO animalDTO = new AnimalDTO("Tiger","walking");
 
         mockMvc.perform(post("/animals")
                 .content(objectMapper.writeValueAsString(animalDTO))
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isCreated());
+    }
+
+    @Test
+    public void viewAnimals() throws Exception{
+        //add animals
+        AnimalDTO animalDTO = new AnimalDTO("Tiger","walking");
+
+        mockMvc.perform(post("/animals")
+                .content(objectMapper.writeValueAsString(animalDTO))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isCreated());
+
+        mockMvc.perform(get("/animals")
+        ).andExpect(status().isOk())
+        .andExpect(jsonPath("length()").value(1));
     }
 
 }
