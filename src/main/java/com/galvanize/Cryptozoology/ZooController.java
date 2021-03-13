@@ -5,19 +5,30 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.annotation.Target;
+import java.util.ArrayList;
 
 @RestController
 public class ZooController {
+
+    //@Autowired
+    ArrayList<AnimalDTO> animalList;
+
+    ZooController(){
+        animalList = new ArrayList<>();
+    }
 
     @PostMapping("animals")
     @ResponseStatus(HttpStatus.CREATED)
     public void addAnimals(@RequestBody AnimalDTO animalDTO){
 
+        animalList.add(animalDTO);
+
     }
 
     @GetMapping("animals")
     @ResponseStatus(HttpStatus.OK)
-    public String getAnimals(){
-        return "[{},{}]";
+    public ArrayList<AnimalDTO> getAnimals(){
+        //return "[{},{}]";
+        return this.animalList;
     }
 }

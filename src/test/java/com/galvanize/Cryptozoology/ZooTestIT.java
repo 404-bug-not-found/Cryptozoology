@@ -37,7 +37,7 @@ public class ZooTestIT {
     public void viewAnimals() throws Exception{
         //add animals
         AnimalDTO animalDTO1 = new AnimalDTO("Tiger","walking");
-        AnimalDTO animalDTO2 = new AnimalDTO("Tiger","walking");
+        AnimalDTO animalDTO2 = new AnimalDTO("Dolphin","swimming");
 
         mockMvc.perform(post("/animals")
                 .content(objectMapper.writeValueAsString(animalDTO1))
@@ -51,7 +51,11 @@ public class ZooTestIT {
 
         mockMvc.perform(get("/animals")
         ).andExpect(status().isOk())
-        .andExpect(jsonPath("length()").value(2));
+        .andExpect(jsonPath("length()").value(2))
+        .andExpect(jsonPath("[0].name").value("Tiger"))
+        .andExpect(jsonPath("[0].type").value("walking"))
+        .andExpect(jsonPath("[1].name").value("Dolphin"))
+        .andExpect(jsonPath("[1].type").value("swimming"));
     }
 
 }
