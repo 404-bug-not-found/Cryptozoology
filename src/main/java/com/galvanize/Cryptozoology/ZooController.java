@@ -35,7 +35,7 @@ public class ZooController {
 
     @PutMapping("feedAnimal")
     @ResponseStatus(HttpStatus.OK)
-    public void feedAnimal(@RequestBody AnimalDTO animalDTO){
+    public void feedAnimal(){
 
         animalList.get(0).mood="happy";
 
