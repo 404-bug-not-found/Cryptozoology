@@ -57,30 +57,30 @@ public class ZooTestIT {
         .andExpect(jsonPath("[1].type").value("swimming"));
     }
 
-    @Test
-    public void feedAnimal() throws Exception {
-
-        //Add Animal
-        AnimalDTO animalDTO1 = new AnimalDTO("Tiger", "walking","unhappy");
-        mockMvc.perform(post("/animal")
-                .content(objectMapper.writeValueAsString(animalDTO1))
-                .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isCreated());
-
-        mockMvc.perform(get("/animals")
-        ).andExpect(status().isOk())
-                .andExpect(jsonPath("[0].mood").value("unhappy"));
-
-
-            mockMvc.perform(put("/feedAnimal")
-                    .content(objectMapper.writeValueAsString(animalDTO1))
-                    .contentType(MediaType.APPLICATION_JSON)
-            ).andExpect(status().isOk());
-
-        mockMvc.perform(get("/animals")
-        ).andExpect(status().isOk())
-                .andExpect(jsonPath("[0].mood").value("happy"));
-
-
-    }
+//    @Test
+//    public void feedAnimal() throws Exception {
+//
+//        //Add Animal
+//        AnimalDTO animalDTO1 = new AnimalDTO("Tiger", "walking","unhappy");
+//        mockMvc.perform(post("/animal")
+//                .content(objectMapper.writeValueAsString(animalDTO1))
+//                .contentType(MediaType.APPLICATION_JSON)
+//        ).andExpect(status().isCreated());
+//
+//        mockMvc.perform(get("/animals")
+//        ).andExpect(status().isOk())
+//                .andExpect(jsonPath("[0].mood").value("unhappy"));
+//
+//
+//            mockMvc.perform(put("/feedAnimal")
+//                    .content(objectMapper.writeValueAsString(animalDTO1))
+//                    .contentType(MediaType.APPLICATION_JSON)
+//            ).andExpect(status().isOk());
+//
+//        mockMvc.perform(get("/animals")
+//        ).andExpect(status().isOk())
+//                .andExpect(jsonPath("[0].mood").value("happy"));
+//
+//
+//    }
 }

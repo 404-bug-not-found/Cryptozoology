@@ -6,38 +6,44 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.annotation.Target;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ZooController {
 
     //@Autowired
-    ArrayList<AnimalDTO> animalList;
+    //ArrayList<AnimalDTO> animalList;
 
-    ZooController(){
-        animalList = new ArrayList<>();
+    AnimalService animalService;
+
+//    ZooController(){
+//        animalList = new ArrayList<>();
+//    }
+
+    public ZooController(AnimalService animalService){
+        this.animalService=animalService;
     }
 
     @PostMapping("animal")
     @ResponseStatus(HttpStatus.CREATED)
     public void addAnimals(@RequestBody AnimalDTO animalDTO){
 
-        animalList.add(animalDTO);
+        //animalList.add(animalDTO);
+        this.animalService.create(animalDTO);
 
     }
 
     @GetMapping("animals")
     @ResponseStatus(HttpStatus.OK)
-    public ArrayList<AnimalDTO> getAnimals(){
+    public List<AnimalDTO> getAnimals(){
         //return "[{},{}]";
-        return this.animalList;
+        return this.animalService.fetchAll();
     }
 
 
-    @PutMapping("feedAnimal")
-    @ResponseStatus(HttpStatus.OK)
-    public void feedAnimal(){
-
-        animalList.get(0).mood="happy";
-
-    }
+//    @PutMapping("feedAnimal")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void feedAnimal(){
+//        animalList.get(0).mood="happy";
+//    }
 }
