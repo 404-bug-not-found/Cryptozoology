@@ -9,8 +9,6 @@ import java.lang.annotation.Target;
 @RestController
 public class ZooController {
 
-
-
     @PostMapping("animals")
     @ResponseStatus(HttpStatus.CREATED)
     public void addAnimals(@RequestBody AnimalDTO animalDTO){
@@ -20,6 +18,6 @@ public class ZooController {
     @GetMapping("animals")
     @ResponseStatus(HttpStatus.OK)
     public String getAnimals(){
-        return "[{}]";
+        return "[{},{}]";
     }
 }
