@@ -17,7 +17,7 @@ public class ZooController {
         animalList = new ArrayList<>();
     }
 
-    @PostMapping("animals")
+    @PostMapping("animal")
     @ResponseStatus(HttpStatus.CREATED)
     public void addAnimals(@RequestBody AnimalDTO animalDTO){
 
@@ -30,5 +30,14 @@ public class ZooController {
     public ArrayList<AnimalDTO> getAnimals(){
         //return "[{},{}]";
         return this.animalList;
+    }
+
+
+    @PutMapping("feedAnimal")
+    @ResponseStatus(HttpStatus.OK)
+    public void feedAnimal(@RequestBody AnimalDTO animalDTO){
+
+        animalList.get(0).mood="happy";
+
     }
 }
